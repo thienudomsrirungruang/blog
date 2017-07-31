@@ -25,7 +25,7 @@ public class MockContent {
         return contentList;
     }
 
-    public Content buildContent(String title, String contentPreview ){
+    public Content buildContent(String title, String contentPreview){
         Content content = new Content();
         content.setTitle(title);
         content.setContent(contentPreview);
