@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Deprecated
 public class MockContent {
 
     public List<Content> getMockContent(){

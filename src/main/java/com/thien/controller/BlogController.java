@@ -1,7 +1,7 @@
 package com.thien.controller;
 
 import com.thien.entity.Content;
-import com.thien.service.MockContent;
+import com.thien.service.ContentGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.util.List;
 public class BlogController {
 
     @Autowired
-    private MockContent mockContent;
+    private ContentGetter contentGetter;
 
     @RequestMapping("")
     public String getMain(){
@@ -23,6 +23,6 @@ public class BlogController {
     @RequestMapping("/content")
     @ResponseBody
     public List<Content> getContent(){
-        return mockContent.getMockContent();
+        return contentGetter.getContent();
     }
 }
