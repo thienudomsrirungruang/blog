@@ -61,9 +61,10 @@ body{
     text-align: center;
     margin-bottom: 10px;
     font-size: 24px;
+    color: #000;
 }
 
-#content{
-    color: #DDD;
+#post{
+    color: #333;
     font-size: 16px;
 }

@@ -7,6 +7,7 @@ import com.thien.service.MockPostContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,7 +39,7 @@ public class BlogController {
         return "post";
     }
 
-    @RequestMapping("/post-info/{postId}")
+    @RequestMapping(value = "/post-info", method = RequestMethod.POST)
     @ResponseBody
     public PostContent getPostContent(@RequestParam int id){
         return mpc.getPostContent();
