@@ -20,9 +20,9 @@ public class BlogController {
         return "main";
     }
 
-    @RequestMapping("/content")
+    @RequestMapping("/content-preview")
     @ResponseBody
-    public List<Content> getContent(){
+    public List<Content> getContentPreview(){
         return contentGetter.getContent();
     }
 

@@ -23,10 +23,10 @@ function shakePicture() {
 }
 
 function requestContent(){
-    let response = 'Hello';
+    let response = '';
     $.ajax({
         method:'POST',
-        url:'/content'
+        url:'/content-preview'
     }).done(function(data){
         response = data;
         setContent(response);
