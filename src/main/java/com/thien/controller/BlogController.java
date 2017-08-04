@@ -25,4 +25,9 @@ public class BlogController {
     public List<Content> getContent(){
         return contentGetter.getContent();
     }
+
+    @RequestMapping("/post/{postName}")
+    public String getPost(){
+        return "post";
+    }
 }
