@@ -29,19 +29,11 @@ function requestContent(){
 }
 
 function setContent(content){
-    let date = $('#date');
-    let title = $('#title');
-    let post = $('#post');
-    date.html(function(){
+    let container = $('#content-margin');
+    container.html(function(){
         let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         let postDate = new Date(content.lastMntDate);
         let dateString = postDate.getDate() + ' ' + monthNames[postDate.getMonth()] + ' ' + (postDate.getYear() + 1900);
-        return dateString;
-    })
-    title.html(function(){
-        return content.title;
-    })
-    post.html(function(){
-        return content.content;
+        return '<div id="date">' + dateString + '</div><div id="title">' + content.title + '</div><div id="post">' + content.content + '</div>';
     })
 }
