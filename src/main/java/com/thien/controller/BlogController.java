@@ -1,10 +1,13 @@
 package com.thien.controller;
 
 import com.thien.entity.Content;
+import com.thien.entity.PostContent;
 import com.thien.service.ContentGetter;
+import com.thien.service.MockPostContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -14,6 +17,10 @@ public class BlogController {
 
     @Autowired
     private ContentGetter contentGetter;
+
+    @Autowired
+    private MockPostContent mpc;
+
 
     @RequestMapping("")
     public String getMain(){
@@ -29,5 +36,11 @@ public class BlogController {
     @RequestMapping("/post/{postName}")
     public String getPost(){
         return "post";
+    }
+
+    @RequestMapping("/post-info/{postId}")
+    @ResponseBody
+    public PostContent getPostContent(@RequestParam int id){
+        return mpc.getPostContent();
     }
 }
