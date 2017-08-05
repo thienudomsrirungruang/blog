@@ -8,7 +8,7 @@ function init(){
 }
 
 function home(){
-    window.location.href = "/../..";
+    window.location.href = "/";
 }
 
 function shakePicture(){

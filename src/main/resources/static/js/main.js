@@ -34,7 +34,6 @@ function requestContent(){
 }
 
 function setContent( content ){
-    console.log(content);
 	let data = $('#content-margin');
 	data.html(function(){
 		let finalHTML = '';
