@@ -1,4 +1,4 @@
-package com.thien.service;
+package com.thien.dao;
 
 import java.sql.*;
 
