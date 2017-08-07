@@ -12,52 +12,33 @@ import java.util.List;
 
 @Service
 public class ContentGetter {
-    private boolean hasContent = false;
-    private List<Content> content;
     private ContentDao cd;
 
     public ContentGetter(){
         cd = ContentDao.getInstance();
     }
 
-    public List<Content> getContent() {
-        if(hasContent){
-            return content;
-        }
-        ResultSet rs = cd.getContent();
-        if(rs != null) {
-            ArrayList<Content> output = new ArrayList<>();
-            try {
-                while (rs.next()) {
-                    output.add(buildContent(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4)));
-                }
-            } catch (SQLException e) {
-                return null;
-            }
-            content = output;
-            return content;
-        }else{
-            return null;
-        }
-    }
-
-    public List<Content> getContentPreview(){
-        List<Content> postContent = getContent();
+    public List<Content> getPage(int page){
+        ResultSet postContent = cd.getContentInRange((page - 1) * 10, 10);;
         ArrayList<Content> output = new ArrayList<>();
-        for(Content c : postContent){
-            output.add(buildContent(c.getId(), c.getTitle(), c.getContent().substring(0, Math.min(c.getContent().length(), 512)), c.getLastMntDate()));
+        try {
+            while(postContent.next()){
+                output.add(buildContent(postContent.getInt(1), postContent.getString(2), postContent.getString(3), postContent.getDate(4)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return output;
     }
 
     public Content getContentById(int id){
-        List<Content> postContent = getContent();
-        for(Content c : postContent){
-            if(c.getId() == id){
-                return c;
-            }
+        ResultSet rs = cd.getContentById(id);
+        try {
+            return buildContent(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public Content buildContent(int id, String title, String text, Date date){

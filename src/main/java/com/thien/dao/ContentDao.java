@@ -7,8 +7,12 @@ public class ContentDao {
     private Connection connection;
 
     private static final String GET_CONTENT_SQL = "select * from posts order by last_mnt_date desc;";
+    private static final String GET_CONTENT_BY_ID_SQL = "select * from posts where id = ?";
+    private static final String GET_CONTENT_IN_RANGE_SQL = "select * from posts order by last_mnt_date desc limit ?, ?";
 
     private PreparedStatement getContentSqlStatement;
+    private PreparedStatement getContentByIdSqlStatement;
+    private PreparedStatement getContentInRangeSqlStatement;
 
     public static ContentDao getInstance(){
         if(dao == null){
@@ -21,6 +25,8 @@ public class ContentDao {
         connection = getConnection();
         try {
             getContentSqlStatement = connection.prepareStatement(GET_CONTENT_SQL);
+            getContentByIdSqlStatement = connection.prepareStatement(GET_CONTENT_BY_ID_SQL);
+            getContentInRangeSqlStatement = connection.prepareStatement(GET_CONTENT_IN_RANGE_SQL);
         } catch (SQLException e) {
             System.out.println("PreparedStatement failure");
         }
@@ -34,7 +40,7 @@ public class ContentDao {
         }
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/blog?useSSL=false", "username","password");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/blog?useSSL=false", "thien","1234567890");
         } catch (SQLException e) {
             System.out.println("Failed to get connection");
         }
@@ -50,6 +56,27 @@ public class ContentDao {
         try {
             ResultSet rs = getContentSqlStatement.executeQuery();
             return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getContentById(int id){
+        try{
+            getContentByIdSqlStatement.setInt(1, id);
+            return getContentByIdSqlStatement.executeQuery();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getContentInRange(int start, int numberOfItems){
+        try {
+            getContentInRangeSqlStatement.setInt(1, start);
+            getContentInRangeSqlStatement.setInt(2, numberOfItems);
+            return getContentInRangeSqlStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
