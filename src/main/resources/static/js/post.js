@@ -4,7 +4,11 @@ function init(){
     $('#sidebar-picture').click(home);
     $('#sidebar-picture').hover(shakePicture);
 
-    requestContent();
+    let pathname = window.location.pathname;
+    let content = pathname.split('/');
+    var lastContent = content[2];
+
+    requestContent(lastContent);
 }
 
 function home(){
@@ -16,12 +20,12 @@ function shakePicture(){
 }
 
 
-function requestContent(){
+function requestContent(lastContent){
     let response;
     $.ajax({
         method: 'POST',
         url: '/post-info',
-        data: {id: 0}
+        data: {idString: lastContent}
     }).done(function(data){
         response = data;
         setContent(response);

@@ -29,7 +29,7 @@ public class ContentGetter {
             ArrayList<Content> output = new ArrayList<>();
             try {
                 while (rs.next()) {
-                    output.add(buildContent(rs.getString(2), rs.getString(3), rs.getDate(4)));
+                    output.add(buildContent(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4)));
                 }
             } catch (SQLException e) {
                 return null;
@@ -41,10 +41,30 @@ public class ContentGetter {
         }
     }
 
-    public Content buildContent(String title, String contentPreview, Date date){
+    public List<Content> getContentPreview(){
+        List<Content> postContent = getContent();
+        ArrayList<Content> output = new ArrayList<>();
+        for(Content c : postContent){
+            output.add(buildContent(c.getId(), c.getTitle(), c.getContent().substring(0, Math.min(c.getContent().length(), 512)), c.getLastMntDate()));
+        }
+        return output;
+    }
+
+    public Content getContentById(int id){
+        List<Content> postContent = getContent();
+        for(Content c : postContent){
+            if(c.getId() == id){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Content buildContent(int id, String title, String text, Date date){
         Content content = new Content();
+        content.setId(id);
         content.setTitle(title);
-        content.setContent(contentPreview);
+        content.setContent(text);
         content.setLastMntDate(date);
         return content;
     }
