@@ -6,7 +6,7 @@ public class ContentDao {
     private static ContentDao dao;
     private Connection connection;
 
-    private static final String GET_CONTENT_SQL = "select * from previews;";
+    private static final String GET_CONTENT_SQL = "select * from posts order by last_mnt_date desc;";
 
     private PreparedStatement getContentSqlStatement;
 

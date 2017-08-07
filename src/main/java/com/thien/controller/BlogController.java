@@ -25,6 +25,11 @@ public class BlogController {
         return "main";
     }
 
+    @RequestMapping("/page/{pageNumber}")
+    public String getResultPage(){
+        return "main";
+    }
+
     @RequestMapping("/content-preview")
     @ResponseBody
     public List<Content> getContentPreview(){
