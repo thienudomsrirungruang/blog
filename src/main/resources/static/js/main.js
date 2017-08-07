@@ -6,9 +6,13 @@ function init(){
 	$('#sidebar-picture').hover( shakePicture )
 
 	let pathname = window.location.pathname;
+    
     let content = pathname.split('/');
-    var page = content[2];
-
+    if(content.length >= 3){
+        var page = content[2];
+    }else{
+        page = 1;
+    }
     requestContent(page);
 }
 
