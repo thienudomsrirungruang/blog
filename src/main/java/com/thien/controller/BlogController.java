@@ -30,10 +30,10 @@ public class BlogController {
         return "main";
     }
 
-    @RequestMapping("/content-preview")
+    @RequestMapping(value = "/content-preview", method = RequestMethod.POST)
     @ResponseBody
-    public List<Content> getContentPreview(){
-        return contentGetter.getContentPreview();
+    public List<Content> getContentPreview(@RequestParam int page){
+        return contentGetter.getPage(page);
     }
 
     @RequestMapping("/post/{postId}")

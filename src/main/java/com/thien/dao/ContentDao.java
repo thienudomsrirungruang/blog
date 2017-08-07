@@ -40,7 +40,7 @@ public class ContentDao {
         }
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/blog?useSSL=false", "thien","1234567890");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/blog?useSSL=false", "username","password");
         } catch (SQLException e) {
             System.out.println("Failed to get connection");
         }

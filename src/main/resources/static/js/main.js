@@ -5,7 +5,11 @@ function init(){
 	$('#sidebar-picture').click( change )
 	$('#sidebar-picture').hover( shakePicture )
 
-    requestContent();
+	let pathname = window.location.pathname;
+    let content = pathname.split('/');
+    var page = content[2];
+
+    requestContent(page);
 }
 
 
@@ -22,11 +26,12 @@ function shakePicture() {
 	$( '#sidebar-picture' ).effect('shake',{direction:'right',distance:5,times:3})
 }
 
-function requestContent(){
+function requestContent(page){
     let response = '';
     $.ajax({
         method:'POST',
-        url:'/content-preview'
+        url:'/content-preview',
+        data: {page: page}
     }).done(function(data){
         response = data;
         setContent(response);
