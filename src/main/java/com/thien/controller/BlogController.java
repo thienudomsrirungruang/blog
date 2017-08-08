@@ -19,7 +19,6 @@ public class BlogController {
     private ContentGetter contentGetter;
 
 
-
     @RequestMapping("")
     public String getMain(){
         return "main";
@@ -50,5 +49,17 @@ public class BlogController {
         }catch(NumberFormatException e){
             return null;
         }
+    }
+
+    @RequestMapping("/post-number")
+    @ResponseBody
+    public int getNumberOfPosts(){
+        return contentGetter.getNumberOfPosts();
+    }
+
+    @RequestMapping("/page-number")
+    @ResponseBody
+    public int getNumberOfPages(){
+        return contentGetter.getNumberOfPages();
     }
 }

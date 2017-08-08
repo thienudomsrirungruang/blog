@@ -9,10 +9,12 @@ public class ContentDao {
     private static final String GET_CONTENT_SQL = "select * from posts order by last_mnt_date desc;";
     private static final String GET_CONTENT_BY_ID_SQL = "select * from posts where id = ?";
     private static final String GET_CONTENT_IN_RANGE_SQL = "select * from posts order by last_mnt_date desc limit ?, ?";
+    private static final String GET_NUMBER_OF_POSTS_SQL = "select count(*) from posts;";
 
     private PreparedStatement getContentSqlStatement;
     private PreparedStatement getContentByIdSqlStatement;
     private PreparedStatement getContentInRangeSqlStatement;
+    private PreparedStatement getNumberOfPostsSqlStatement;
 
     public static ContentDao getInstance(){
         if(dao == null){
@@ -27,6 +29,7 @@ public class ContentDao {
             getContentSqlStatement = connection.prepareStatement(GET_CONTENT_SQL);
             getContentByIdSqlStatement = connection.prepareStatement(GET_CONTENT_BY_ID_SQL);
             getContentInRangeSqlStatement = connection.prepareStatement(GET_CONTENT_IN_RANGE_SQL);
+            getNumberOfPostsSqlStatement = connection.prepareStatement(GET_NUMBER_OF_POSTS_SQL);
         } catch (SQLException e) {
             System.out.println("PreparedStatement failure");
         }
@@ -77,6 +80,15 @@ public class ContentDao {
             getContentInRangeSqlStatement.setInt(1, start);
             getContentInRangeSqlStatement.setInt(2, numberOfItems);
             return getContentInRangeSqlStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getNumberOfPosts(){
+        try {
+            return getNumberOfPostsSqlStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

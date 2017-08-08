@@ -49,4 +49,19 @@ public class ContentGetter {
         content.setLastMntDate(date);
         return content;
     }
+
+    public int getNumberOfPosts(){
+        try {
+            ResultSet rs = cd.getNumberOfPosts();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int getNumberOfPages(){
+        return (int) Math.ceil(getNumberOfPosts() / 10.0);
+    }
 }
