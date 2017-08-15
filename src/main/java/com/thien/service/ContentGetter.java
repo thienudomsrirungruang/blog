@@ -34,6 +34,7 @@ public class ContentGetter {
     public Content getContentById(int id){
         ResultSet rs = cd.getContentById(id);
         try {
+            rs.next();
             return buildContent(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4));
         } catch (SQLException e) {
             e.printStackTrace();
