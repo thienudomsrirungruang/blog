@@ -84,3 +84,12 @@ body{
     color: #777;
     margin-top: 15px;
 }
+
+
+.btn{
+    background-color: #006 !important;
+}
+
+.bottom-link{
+    margin: 10px 10px 40px;
+}
