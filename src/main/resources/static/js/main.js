@@ -52,7 +52,7 @@ function setContent(content){
     for (let i = 0; i < content.length; i++){
         let postDate = new Date(content[i].lastMntDate);
         let dateString = postDate.getDate() + ' ' + monthNames[postDate.getMonth()] + ' ' + (postDate.getYear() + 1900);
-        finalHTML += ('<div class="article-container"><div class="title-preview">' + content[i].title + '</div><div class="content-preview">' + content[i].content + '</div><div class="date-preview">' + dateString + '</div></div><div class=horizontal-line></div>');
+        finalHTML += ('<div class="article-container"><a href="/post/' + content[i].id + '" class="title-preview">' + content[i].title + '</a><div class="content-preview">' + content[i].content + '</div><div class="date-preview">' + dateString + '</div></div><div class=horizontal-line></div>');
     }
     $.ajax({
         method:'POST',
