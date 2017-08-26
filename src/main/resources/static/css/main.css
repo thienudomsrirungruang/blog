@@ -48,6 +48,17 @@ body{
 	border-radius: 50%;
 }
 
+
+#links{
+    margin-top: 4vh;
+}
+
+#home-icon{
+    font-size: 30px;
+}
+
+
+
 .horizontal-line {
     display: block;
     height: 1px;
@@ -56,8 +67,6 @@ body{
     margin: 5px 0;
     padding: 0;
 }
-
-
 
 .article-container {
     margin: 15px 4%;
